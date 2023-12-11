@@ -1,5 +1,6 @@
 package com.github.felipovski.travelorder;
 
+import io.smallrye.common.annotation.RunOnVirtualThread;
 import jakarta.transaction.Transactional;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
@@ -17,6 +18,7 @@ public class TravelOrderResource {
 
     @GET
     @Produces(MediaType.APPLICATION_JSON)
+    @RunOnVirtualThread
     public List<TravelOrderDTO> orders() {
         return TravelOrder.<TravelOrder>listAll().stream()
                 .map(order -> TravelOrderDTO.of(
